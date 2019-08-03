@@ -59,7 +59,6 @@
 <script>
     var checkpoint = "Black";
     function changeBG(colour) {
-        console.log("changing to " + colour);
         rgbColour = hexToRgb("#" + colour)
         document.body.style.background = "rgb("+ rgbColour.r + "," + rgbColour.g + "," + rgbColour.b + ")";
         setTextColour(rgbColour);
@@ -87,8 +86,6 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.name.value);
-                console.log(document.getElementById("colourName"));
                 document.getElementById("colourName").innerHTML = data.name.value;
             })
             .catch(err => {
@@ -100,7 +97,6 @@
             return acc + cur;
         })
         const lightness = ((Math.abs(total - 765)) / 765) * 255;
-        console.log(lightness);
         const [...text] = document.getElementsByClassName("text");
         text.forEach(element => {
             element.style.color = "rgb("+ lightness + "," + lightness + "," + lightness + ")";
