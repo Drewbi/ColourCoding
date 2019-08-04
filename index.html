@@ -96,7 +96,7 @@
         const total = Object.values(rgb).reduce((acc, cur) => {
             return acc + cur;
         })
-        const lightness = ((Math.abs(total - 765)) / 765) * 255;
+        const lightness = total > 382 ? 0 : 255;
         const [...text] = document.getElementsByClassName("text");
         text.forEach(element => {
             element.style.color = "rgb("+ lightness + "," + lightness + "," + lightness + ")";
