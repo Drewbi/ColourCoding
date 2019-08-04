@@ -44,9 +44,14 @@ function setTextColour(rgb) {
         return acc + cur;
     })
     const lightness = total > 382 ? 0 : 255;
+    const rgbVal = `rgb(${lightness}, ${lightness}, ${lightness})`;
     const [...text] = document.getElementsByClassName("text");
     text.forEach(element => {
-        element.style.color = `rgb(${lightness}, ${lightness}, ${lightness})`;
+        element.style.color = rgbVal;
+    });
+    const [...loadingelems] = document.querySelectorAll("#loader > div");
+    loadingelems.forEach(element => {
+        element.style.background = rgbVal;
     });
 }
 function evalColour(colour) {
