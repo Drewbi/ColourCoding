@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <title>ColourCoding</title>
 </head>
+
 <body>
     <div class="container">
         <h1 class="text" id="hint">
@@ -15,118 +18,13 @@
         <p class="text" id="hash">#</p>
         <input type="text" maxlength="6" class="textfield" onkeyup="checkField(this)">
         <p class="text" id="colourName">White</p>
+        <div id="loader" class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
 </body>
-<style>
-    body {
-        background-color: white;
-    }
-    .container {
-        display: grid;
-        grid-template-rows: 40vh auto 10vh;
-        grid-template-columns: 10vw auto 10vw;
-    }
-    .textfield {
-        grid-column-start: 2;
-        grid-row-start: 2;
-        justify-self: center;
-        align-self: center;
-        font-size: 4vh;
-        height: calc(20px + 5vh);
-        width: 30vw;
-    }
-    #hash {
-        grid-column-start: 2;
-        grid-row-start: 2;
-        justify-self: center;
-        font-size: calc(20px + 5vh);
-        margin: 0;
-        padding-right: calc((100vw - 20vw)/2);
-    }
-    #hint {
-        grid-column-start: 2;
-        justify-self: center;
-        align-self: end;
-        font-family: 'Work Sans', Tahoma, Geneva, Verdana, sans-serif
-    }
-    #colourName {
-        grid-row-start: 3;
-        justify-self: center;
-        grid-column-start: 2;
-        font-family: 'Work Sans', Tahoma, Geneva, Verdana, sans-serif
-    }
-</style>
-<script>
-    var checkpoint = "Try Black";
-    function changeBG(colour) {
-        rgbColour = hexToRgb("#" + colour)
-        document.body.style.background = "rgb("+ rgbColour.r + "," + rgbColour.g + "," + rgbColour.b + ")";
-        setTextColour(rgbColour);
-        subText(colour);
-        evalColour(colour);
-    }
-    function checkField(elem) {
-        console.log(elem.value);
-        elem.value = elem.value.replace(/[^0-9a-f]/g, '')
-        if (elem.value.length === 6) {
-            changeBG(elem.value);
-        }
-    }
-    function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
-    }
-    function subText(colour) {
-        fetch("https://www.thecolorapi.com/id?hex=" + colour, {
-            "method": "GET",
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("colourName").innerHTML = data.name.value;
-            })
-            .catch(err => {
-            console.log(err);
-        });
-    }
-    function setTextColour(rgb){
-        const total = Object.values(rgb).reduce((acc, cur) => {
-            return acc + cur;
-        })
-        const lightness = total > 382 ? 0 : 255;
-        const [...text] = document.getElementsByClassName("text");
-        text.forEach(element => {
-            element.style.color = "rgb("+ lightness + "," + lightness + "," + lightness + ")";
-        });
-    }
-    function evalColour(colour) {
-        const hint = document.getElementById("hint");
-        if (colour === '000000') {
-            checkpoint = "Try 69dc9e";
-        } else if (colour === '69dc9e') {
-            checkpoint = "Try 239384";
-        } else if (colour === '239384') {
-            checkpoint = "Try 6bbaec";
-        } else if (colour === '6bbaec') {
-            checkpoint = "Try 012a36";
-        } else if (colour === '012a36') {
-            checkpoint = "Try dd99bb";
-        } else if (colour === 'dd99bb') {
-            checkpoint = "Try 0fc0fc";
-        } else if (colour === '0fc0fc') {
-            checkpoint = "Try 101010";
-        } else if (colour === '101010') {
-            checkpoint = "Try ffffff";
-        } else if (colour === 'ffffff') {
-            checkpoint = "Try 7f7f7f";
-        } else if (colour === '7f7f7f') {
-            checkpoint = "You Win!"
-            hint.style.color = "white";
-        }
-        hint.innerHTML = checkpoint;
-    }
-</script>
+<script src="main.js"></script>
 </html>
