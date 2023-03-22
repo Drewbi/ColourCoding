@@ -78,5 +78,5 @@ function evalColour(colour) {
         checkpoint = "You Win!"
         hint.style.color = "white";
     }
-    hint.innerHTML = checkpoint;
+    // hint.innerHTML = checkpoint;
 }
