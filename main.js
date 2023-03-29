@@ -1,18 +1,18 @@
-var checkpoint = "Try Black";
 function changeBG(colour) {
     rgbColour = hexToRgb("#" + colour)
     const { r, g, b } = rgbColour;
     document.body.style.background = `rgb(${r}, ${g}, ${b})`;
     colourName(colour);
     setTextColour(rgbColour);
-    evalColour(colour);
 }
+
 function checkField(elem) {
     elem.value = elem.value.toLowerCase.replace(/[^0-9a-f]/g, '')
     if (elem.value.length === 6) {
         changeBG(elem.value);
     }
 }
+
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -21,6 +21,7 @@ function hexToRgb(hex) {
         b: parseInt(result[3], 16)
     } : null;
 }
+
 function colourName(colour) {
     const subtext = document.getElementById("colourName");
     const loader = document.getElementById("loader");
@@ -39,6 +40,7 @@ function colourName(colour) {
             subtext.style.display = "block";
         })
 }
+
 function setTextColour(rgb) {
     const total = Object.values(rgb).reduce((acc, cur) => {
         return acc + cur;
@@ -53,30 +55,4 @@ function setTextColour(rgb) {
     loadingelems.forEach(element => {
         element.style.background = rgbVal;
     });
-}
-function evalColour(colour) {
-    const hint = document.getElementById("hint");
-    if (colour === '000000') {
-        checkpoint = "Try 69dc9e";
-    } else if (colour === '69dc9e') {
-        checkpoint = "Try 239384";
-    } else if (colour === '239384') {
-        checkpoint = "Try 6bbaec";
-    } else if (colour === '6bbaec') {
-        checkpoint = "Try 012a36";
-    } else if (colour === '012a36') {
-        checkpoint = "Try dd99bb";
-    } else if (colour === 'dd99bb') {
-        checkpoint = "Try 0fc0fc";
-    } else if (colour === '0fc0fc') {
-        checkpoint = "Try 101010";
-    } else if (colour === '101010') {
-        checkpoint = "Try ffffff";
-    } else if (colour === 'ffffff') {
-        checkpoint = "Try 7f7f7f";
-    } else if (colour === '7f7f7f') {
-        checkpoint = "You Win!"
-        hint.style.color = "white";
-    }
-    // hint.innerHTML = checkpoint;
 }
