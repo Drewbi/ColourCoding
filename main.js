@@ -8,7 +8,7 @@ function changeBG(colour) {
     evalColour(colour);
 }
 function checkField(elem) {
-    elem.value = elem.value.replace(/[^0-9a-f]/g, '')
+    elem.value = elem.value.toLowerCase.replace(/[^0-9a-f]/g, '')
     if (elem.value.length === 6) {
         changeBG(elem.value);
     }
